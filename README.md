@@ -15,8 +15,8 @@ cd LigandMPNN
 
 python ligandmpnn/run.py \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/default"
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/default"
 ```
 
 ### Dependencies
@@ -36,7 +36,7 @@ pip3 install -r requirements.txt
 ### Model parameters
 To download model parameters run:
 ```
-bash ligandmpnn/scripts/get_model_params.sh "liganmpnn/data/model_params"
+bash scripts/get_model_params.sh "liganmpnn/data/model_params"
 ```
 
 ### Available models
@@ -86,24 +86,24 @@ Default settings will run ProteinMPNN.
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/default"
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/default"
 ```
 ### 2 --temperature
 `--temperature 0.05` Change sampling temperature (higher temperature gives more sequence diversity).
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
+        --pdb_path "inputs/1BC8.pdb" \
         --temperature 0.05 \
-        --out_folder "ligandmpnn/data/outputs/temperature"
+        --out_folder "outputs/temperature"
 ```
 ### 3 --seed
 `--seed` Not selecting a seed will run with a random seed. Running this multiple times will give different results.
 ```
 ligandmpnn \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/random_seed"
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/random_seed"
 ```
 ### 4 --verbose
 `--verbose 0` Do not print any statements.
@@ -111,8 +111,8 @@ ligandmpnn \
 ligandmpnn \
         --seed 111 \
         --verbose 0 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/verbose"
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/verbose"
 ```
 ### 5 --save_stats
 `--save_stats 1` Save sequence design statistics.
@@ -120,8 +120,8 @@ ligandmpnn \
 #['generated_sequences', 'sampling_probs', 'log_probs', 'decoding_order', 'native_sequence', 'mask', 'chain_mask', 'seed', 'temperature']
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/save_stats" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/save_stats" \
         --save_stats 1
 ```
 ### 6 --fixed_residues
@@ -129,8 +129,8 @@ ligandmpnn \
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/fix_residues" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/fix_residues" \
         --fixed_residues "C1 C2 C3 C4 C5 C6 C7 C8 C9 C10" \
         --bias_AA "A:10.0"
 ```
@@ -140,8 +140,8 @@ ligandmpnn \
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/redesign_residues" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/redesign_residues" \
         --redesigned_residues "C1 C2 C3 C4 C5 C6 C7 C8 C9 C10" \
         --bias_AA "A:10.0"
 ```
@@ -151,8 +151,8 @@ Design 15 sequences; with batch size 3 (can be 1 when using CPUs) and the number
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/batch_size" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/batch_size" \
         --batch_size 3 \
         --number_of_batches 5
 ```
@@ -161,9 +161,9 @@ Global amino acid bias. In this example, output sequences are biased towards W, 
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
+        --pdb_path "inputs/1BC8.pdb" \
         --bias_AA "W:3.0,P:3.0,C:3.0,A:-3.0" \
-        --out_folder "ligandmpnn/data/outputs/global_bias"
+        --out_folder "outputs/global_bias"
 ```
 ### 10 --bias_AA_per_residue
 Specify per residue amino acid bias, e.g. make residues C1, C3, C5, and C7 to be prolines.
@@ -176,18 +176,18 @@ Specify per residue amino acid bias, e.g. make residues C1, C3, C5, and C7 to be
 # }
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --bias_AA_per_residue "ligandmpnn/data/inputs/bias_AA_per_residue.json" \
-        --out_folder "ligandmpnn/data/outputs/per_residue_bias"
+        --pdb_path "inputs/1BC8.pdb" \
+        --bias_AA_per_residue "inputs/bias_AA_per_residue.json" \
+        --out_folder "outputs/per_residue_bias"
 ```
 ### 11 --omit_AA
 Global amino acid restrictions. This is equivalent to using `--bias_AA` and setting bias to be a large negative number. The output should be just made of E, K, A.
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
+        --pdb_path "inputs/1BC8.pdb" \
         --omit_AA "CDFGHILMNPQRSTVWY" \
-        --out_folder "ligandmpnn/data/outputs/global_omit"
+        --out_folder "outputs/global_omit"
 ```
 
 ### 12 --omit_AA_per_residue
@@ -201,9 +201,9 @@ Per residue amino acid restrictions.
 # }
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --omit_AA_per_residue "ligandmpnn/data/inputs/omit_AA_per_residue.json" \
-        --out_folder "ligandmpnn/data/outputs/per_residue_omit"
+        --pdb_path "inputs/1BC8.pdb" \
+        --omit_AA_per_residue "inputs/omit_AA_per_residue.json" \
+        --out_folder "outputs/per_residue_omit"
 ```
 ### 13 --symmetry_residues
 ### 13 --symmetry_weights
@@ -215,8 +215,8 @@ Designing sequences with symmetry, e.g. homooligomer/2-state proteins, etc. In t
 #output should be ***ooxx
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/symmetry" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/symmetry" \
         --symmetry_residues "C1,C2,C3|C4,C5|C6,C7" \
         --symmetry_weights "0.33,0.33,0.33|0.5,0.5|0.5,0.5"
 ```
@@ -228,8 +228,8 @@ Design homooligomer sequences. This automatically sets `--symmetry_residues` and
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/4GYT.pdb" \
-        --out_folder "ligandmpnn/data/outputs/homooligomer" \
+        --pdb_path "inputs/4GYT.pdb" \
+        --out_folder "outputs/homooligomer" \
         --homo_oligomer 1 \
         --number_of_batches 2
 ```
@@ -239,8 +239,8 @@ Outputs will have a specified ending; e.g. `1BC8_xyz.fa` instead of `1BC8.fa`
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/file_ending" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/file_ending" \
         --file_ending "_xyz"
 ```
 
@@ -249,8 +249,8 @@ Zero indexed names in /backbones/1BC8_0.pdb, 1BC8_1.pdb, 1BC8_2.pdb etc
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/zero_indexed" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/zero_indexed" \
         --zero_indexed 1 \
         --number_of_batches 2
 ```
@@ -261,8 +261,8 @@ Specify which chains (e.g. "A,B,C") need to be redesigned, other chains will be 
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/4GYT.pdb" \
-        --out_folder "ligandmpnn/data/outputs/chains_to_design" \
+        --pdb_path "inputs/4GYT.pdb" \
+        --out_folder "outputs/chains_to_design" \
         --chains_to_design "A,B"
 ```
 ### 18 --parse_these_chains_only
@@ -271,8 +271,8 @@ Parse and design only specified chains (e.g. "A,B,C"). Outputs will have only sp
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/4GYT.pdb" \
-        --out_folder "ligandmpnn/data/outputs/parse_these_chains_only" \
+        --pdb_path "inputs/4GYT.pdb" \
+        --out_folder "outputs/parse_these_chains_only" \
         --parse_these_chains_only "A,B"
 ```
 
@@ -282,8 +282,8 @@ Run LigandMPNN with default settings.
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/ligandmpnn_default"
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/ligandmpnn_default"
 ```
 
 ### 20 --checkpoint_ligand_mpnn
@@ -293,8 +293,8 @@ ligandmpnn \
         --checkpoint_ligand_mpnn "ligandmpnn/data/model_params/ligandmpnn_v_32_005_25.pt" \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/ligandmpnn_v_32_005_25"
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/ligandmpnn_v_32_005_25"
 ```
 ### 21 --ligand_mpnn_use_atom_context
 Setting `--ligand_mpnn_use_atom_context 0` will mask all ligand atoms. This can be used to assess how much ligand atoms affect AA probabilities. 
@@ -302,8 +302,8 @@ Setting `--ligand_mpnn_use_atom_context 0` will mask all ligand atoms. This can 
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/ligandmpnn_no_context" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/ligandmpnn_no_context" \
         --ligand_mpnn_use_atom_context 0
 ```
 
@@ -313,8 +313,8 @@ Use fixed residue side chain atoms as extra ligand atoms.
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/ligandmpnn_use_side_chain_atoms" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/ligandmpnn_use_side_chain_atoms" \
         --ligand_mpnn_use_side_chain_context 1 \
         --fixed_residues "C1 C2 C3 C4 C5 C6 C7 C8 C9 C10"
 ```
@@ -325,8 +325,8 @@ Run SolubleMPNN (ProteinMPNN-like model with only soluble proteins in the traini
 ligandmpnn \
         --model_type "soluble_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/soluble_mpnn_default"
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/soluble_mpnn_default"
 ```
 
 ### 24 --model_type "global_label_membrane_mpnn"
@@ -335,8 +335,8 @@ Run global label membrane MPNN (trained with extra input - binary label soluble 
 ligandmpnn \
         --model_type "global_label_membrane_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/global_label_membrane_mpnn_0" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/global_label_membrane_mpnn_0" \
         --global_transmembrane_label 0
 ```
 
@@ -346,8 +346,8 @@ Run per residue label membrane MPNN (trained with extra input per residue specif
 ligandmpnn \
         --model_type "per_residue_label_membrane_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/per_residue_label_membrane_mpnn_default" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/per_residue_label_membrane_mpnn_default" \
         --transmembrane_buried "C1 C2 C3 C11" \
         --transmembrane_interface "C4 C5 C6 C22"
 ```
@@ -356,8 +356,8 @@ ligandmpnn \
 Choose a symbol to put between different chains in fasta output format. It's recommended to PDB output format to deal with residue jumps and multiple chain parsing.
 ```
 ligandmpnn \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/fasta_seq_separation" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/fasta_seq_separation" \
         --fasta_seq_separation ":"
 ```
 
@@ -365,12 +365,12 @@ ligandmpnn \
 Specify multiple PDB input paths. This is more efficient since the model needs to be loaded from the checkpoint once.
 ```
 #{
-#"ligandmpnn/data/inputs/1BC8.pdb": "",
-#"ligandmpnn/data/inputs/4GYT.pdb": ""
+#"inputs/1BC8.pdb": "",
+#"inputs/4GYT.pdb": ""
 #}
 ligandmpnn \
-        --pdb_path_multi "ligandmpnn/data/inputs/pdb_ids.json" \
-        --out_folder "ligandmpnn/data/outputs/pdb_path_multi" \
+        --pdb_path_multi "inputs/pdb_ids.json" \
+        --out_folder "outputs/pdb_path_multi" \
         --seed 111
 ```
 
@@ -378,13 +378,13 @@ ligandmpnn \
 Specify fixed residues when using `--pdb_path_multi` flag.
 ```
 #{
-#"ligandmpnn/data/inputs/1BC8.pdb": "C1 C2 C3 C4 C5 C10 C22",
-#"ligandmpnn/data/inputs/4GYT.pdb": "A7 A8 A9 A10 A11 A12 A13 B38"
+#"inputs/1BC8.pdb": "C1 C2 C3 C4 C5 C10 C22",
+#"inputs/4GYT.pdb": "A7 A8 A9 A10 A11 A12 A13 B38"
 #}
 ligandmpnn \
-        --pdb_path_multi "ligandmpnn/data/inputs/pdb_ids.json" \
-        --fixed_residues_multi "ligandmpnn/data/inputs/fix_residues_multi.json" \
-        --out_folder "ligandmpnn/data/outputs/fixed_residues_multi" \
+        --pdb_path_multi "inputs/pdb_ids.json" \
+        --fixed_residues_multi "inputs/fix_residues_multi.json" \
+        --out_folder "outputs/fixed_residues_multi" \
         --seed 111
 ```
 
@@ -392,13 +392,13 @@ ligandmpnn \
 Specify which residues need to be redesigned when using `--pdb_path_multi` flag.
 ```
 #{
-#"ligandmpnn/data/inputs/1BC8.pdb": "C1 C2 C3 C4 C5 C10",
-#"ligandmpnn/data/inputs/4GYT.pdb": "A7 A8 A9 A10 A12 A13 B38"
+#"inputs/1BC8.pdb": "C1 C2 C3 C4 C5 C10",
+#"inputs/4GYT.pdb": "A7 A8 A9 A10 A12 A13 B38"
 #}
 ligandmpnn \
-        --pdb_path_multi "ligandmpnn/data/inputs/pdb_ids.json" \
-        --redesigned_residues_multi "ligandmpnn/data/inputs/redesigned_residues_multi.json" \
-        --out_folder "ligandmpnn/data/outputs/redesigned_residues_multi" \
+        --pdb_path_multi "inputs/pdb_ids.json" \
+        --redesigned_residues_multi "inputs/redesigned_residues_multi.json" \
+        --out_folder "outputs/redesigned_residues_multi" \
         --seed 111
 ```
 
@@ -406,13 +406,13 @@ ligandmpnn \
 Specify which residues need to be omitted when using `--pdb_path_multi` flag.
 ```
 #{
-#"ligandmpnn/data/inputs/1BC8.pdb": {"C1":"ACDEFGHILMNPQRSTVWY", "C2":"ACDEFGHILMNPQRSTVWY", "C3":"ACDEFGHILMNPQRSTVWY"},
-#"ligandmpnn/data/inputs/4GYT.pdb": {"A7":"ACDEFGHILMNPQRSTVWY", "A8":"ACDEFGHILMNPQRSTVWY"}
+#"inputs/1BC8.pdb": {"C1":"ACDEFGHILMNPQRSTVWY", "C2":"ACDEFGHILMNPQRSTVWY", "C3":"ACDEFGHILMNPQRSTVWY"},
+#"inputs/4GYT.pdb": {"A7":"ACDEFGHILMNPQRSTVWY", "A8":"ACDEFGHILMNPQRSTVWY"}
 #}
 ligandmpnn \
-        --pdb_path_multi "ligandmpnn/data/inputs/pdb_ids.json" \
-        --omit_AA_per_residue_multi "ligandmpnn/data/inputs/omit_AA_per_residue_multi.json" \
-        --out_folder "ligandmpnn/data/outputs/omit_AA_per_residue_multi" \
+        --pdb_path_multi "inputs/pdb_ids.json" \
+        --omit_AA_per_residue_multi "inputs/omit_AA_per_residue_multi.json" \
+        --out_folder "outputs/omit_AA_per_residue_multi" \
         --seed 111
 ```
 
@@ -420,13 +420,13 @@ ligandmpnn \
 Specify amino acid biases per residue when using `--pdb_path_multi` flag.
 ```
 #{
-#"ligandmpnn/data/inputs/1BC8.pdb": {"C1":{"A":3.0, "P":-2.0}, "C2":{"W":10.0, "G":-0.43}},
-#"ligandmpnn/data/inputs/4GYT.pdb": {"A7":{"Y":5.0, "S":-2.0}, "A8":{"M":3.9, "G":-0.43}}
+#"inputs/1BC8.pdb": {"C1":{"A":3.0, "P":-2.0}, "C2":{"W":10.0, "G":-0.43}},
+#"inputs/4GYT.pdb": {"A7":{"Y":5.0, "S":-2.0}, "A8":{"M":3.9, "G":-0.43}}
 #}
 ligandmpnn \
-        --pdb_path_multi "ligandmpnn/data/inputs/pdb_ids.json" \
-        --bias_AA_per_residue_multi "ligandmpnn/data/inputs/bias_AA_per_residue_multi.json" \
-        --out_folder "ligandmpnn/data/outputs/bias_AA_per_residue_multi" \
+        --pdb_path_multi "inputs/pdb_ids.json" \
+        --bias_AA_per_residue_multi "inputs/bias_AA_per_residue_multi.json" \
+        --out_folder "outputs/bias_AA_per_residue_multi" \
         --seed 111
 ```
 
@@ -436,9 +436,9 @@ This sets the cutoff distance in angstroms to select residues that are considere
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
+        --pdb_path "inputs/1BC8.pdb" \
         --ligand_mpnn_cutoff_for_score "6.0" \
-        --out_folder "ligandmpnn/data/outputs/ligand_mpnn_cutoff_for_score"
+        --out_folder "outputs/ligand_mpnn_cutoff_for_score"
 ```
 
 ### 33 specifying residues with insertion codes
@@ -446,8 +446,8 @@ You can specify residue using chain_id + residue_number + insersion_code; e.g. r
 ```
 ligandmpnn \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/2GFB.pdb" \
-        --out_folder "ligandmpnn/data/outputs/insertion_code" \
+        --pdb_path "inputs/2GFB.pdb" \
+        --out_folder "outputs/insertion_code" \
         --redesigned_residues "B82 B82A B82B B82C" \
         --parse_these_chains_only "B"
 ```
@@ -458,8 +458,8 @@ Parse atoms in the PDB files with zero occupancy too.
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/parse_atoms_with_zero_occupancy" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/parse_atoms_with_zero_occupancy" \
         --parse_atoms_with_zero_occupancy 1
 ```
 
@@ -488,8 +488,8 @@ python score.py \
         --model_type "ligand_mpnn" \
         --seed 111 \
         --autoregressive_score 1\
-        --pdb_path "ligandmpnn/data/outputs/ligandmpnn_default/backbones/1BC8_1.pdb" \
-        --out_folder "ligandmpnn/data/outputs/autoregressive_score_w_seq" \
+        --pdb_path "outputs/ligandmpnn_default/backbones/1BC8_1.pdb" \
+        --out_folder "outputs/autoregressive_score_w_seq" \
         --use_sequence 1\
         --batch_size 1 \
         --number_of_batches 10
@@ -501,8 +501,8 @@ python score.py \
         --model_type "ligand_mpnn" \
         --seed 111 \
         --autoregressive_score 1\
-        --pdb_path "ligandmpnn/data/outputs/ligandmpnn_default/backbones/1BC8_1.pdb" \
-        --out_folder "ligandmpnn/data/outputs/autoregressive_score_wo_seq" \
+        --pdb_path "outputs/ligandmpnn_default/backbones/1BC8_1.pdb" \
+        --out_folder "outputs/autoregressive_score_wo_seq" \
         --use_sequence 0\
         --batch_size 1 \
         --number_of_batches 10
@@ -514,8 +514,8 @@ python score.py \
         --model_type "ligand_mpnn" \
         --seed 111 \
         --single_aa_score 1\
-        --pdb_path "ligandmpnn/data/outputs/ligandmpnn_default/backbones/1BC8_1.pdb" \
-        --out_folder "ligandmpnn/data/outputs/single_aa_score_w_seq" \
+        --pdb_path "outputs/ligandmpnn_default/backbones/1BC8_1.pdb" \
+        --out_folder "outputs/single_aa_score_w_seq" \
         --use_sequence 1\
         --batch_size 1 \
         --number_of_batches 10
@@ -527,8 +527,8 @@ python score.py \
         --model_type "ligand_mpnn" \
         --seed 111 \
         --single_aa_score 1\
-        --pdb_path "ligandmpnn/data/outputs/ligandmpnn_default/backbones/1BC8_1.pdb" \
-        --out_folder "ligandmpnn/data/outputs/single_aa_score_wo_seq" \
+        --pdb_path "outputs/ligandmpnn_default/backbones/1BC8_1.pdb" \
+        --out_folder "outputs/single_aa_score_wo_seq" \
         --use_sequence 0\
         --batch_size 1 \
         --number_of_batches 10
@@ -542,8 +542,8 @@ Design a new sequence using any of the available models and also pack side chain
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/sc_default_fast" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/sc_default_fast" \
         --pack_side_chains 1 \
         --number_of_packs_per_design 0 \
         --pack_with_ligand_context 1
@@ -554,8 +554,8 @@ Same as above, but returns 4 independent samples for side chains. b-factor shows
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/sc_default" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/sc_default" \
         --pack_side_chains 1 \
         --number_of_packs_per_design 4 \
         --pack_with_ligand_context 1
@@ -567,8 +567,8 @@ This option will not repack side chains of the fixed residues, but use them as a
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/sc_fixed_residues" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/sc_fixed_residues" \
         --pack_side_chains 1 \
         --number_of_packs_per_design 4 \
         --pack_with_ligand_context 1 \
@@ -581,8 +581,8 @@ This option will repacks all the residues.
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/sc_fixed_residues_full_repack" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/sc_fixed_residues_full_repack" \
         --pack_side_chains 1 \
         --number_of_packs_per_design 4 \
         --pack_with_ligand_context 1 \
@@ -596,8 +596,8 @@ You can run side chain packing without taking into account context atoms like DN
 ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
-        --pdb_path "ligandmpnn/data/inputs/1BC8.pdb" \
-        --out_folder "ligandmpnn/data/outputs/sc_no_context" \
+        --pdb_path "inputs/1BC8.pdb" \
+        --out_folder "outputs/sc_no_context" \
         --pack_side_chains 1 \
         --number_of_packs_per_design 4 \
         --pack_with_ligand_context 0
