@@ -442,8 +442,8 @@ def main() -> None:
             device=device,
             num_mix=3,
         )
-
-        checkpoint_sc = torch.load(args.checkpoint_path_sc, map_location=device)
+        checkpoint_path_sc = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_path_sc))
+        checkpoint_sc = torch.load(checkpoint_path_sc, map_location=device)
         model_sc.load_state_dict(checkpoint_sc["model_state_dict"])
         model_sc.to(device)
         model_sc.eval()
