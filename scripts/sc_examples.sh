@@ -32,7 +32,7 @@ ligandmpnn \
         --repack_everything 0
 
 #4 fix specific residues for sequence design but repack everything 
-liganmpnn \
+ligandmpnn \
         --model_type "ligand_mpnn" \
         --seed 111 \
         --pdb_path "../inputs/1BC8.pdb" \

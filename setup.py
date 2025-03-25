@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
     
 setup(
     name="ligandmpnn",
-    version="0.1.0",
+    version="0.1.dev1",
     description="a pip installable version of LigandMPNN with pre-trained models included",
     packages=find_packages(),
     long_description=long_description,
