@@ -5,14 +5,14 @@ with open("README.md", "r") as f:
     
 setup(
     name="ligandmpnn",
-    version="0.1.dev1",
+    version="0.1.1",
     description="a pip installable version of LigandMPNN with pre-trained models included",
     packages=find_packages(),
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/dauparas/LigandMPNN",
     author="originally and primarily authored by Justas Dauparas. installable version by markus.",
-    author_email = "original: justas@uw.edu ; installable: markusjsommer@gmail.com",
+    author_email = "justas@uw.edu",
     license="MIT",
     classifiers=[
         "License :: OSI Approved :: MIT License",
@@ -49,8 +49,8 @@ setup(
         ],
     },
     include_package_data=True,
-    package_data={'ligandmpnn': ['data/inputs/*',
-                       'data/model_params/*',
-                       'data/training/*']},
+    package_data={'ligandmpnn': ['inputs/*',
+                                 'data/model_params/*',
+                                 'scripts/*']},
     
 )
