@@ -23,7 +23,7 @@ conda create -n ligandmpnn_env python=3.11
 conda activate ligandmpnn_env
 ```
 ```
-# download source code
+# download source
 git clone https://github.com/dauparas/LigandMPNN
 cd LigandMPNN
 ```
@@ -43,13 +43,18 @@ bash sc_examples.sh
 
 ### Running the code from source
 ```
+# download source
 git clone https://github.com/dauparas/LigandMPNN.git
 cd LigandMPNN
-
-#setup your conda/or other environment
-#conda create -n ligandmpnn_env python=3.11
-#pip3 install -r requirements.txt
-
+```
+```
+# set up your conda/or other environment
+conda create -n ligandmpnn_env python=3.11
+conda activate ligandmpnn_env
+pip3 install -r requirements.txt
+```
+```
+# example usage
 python ligandmpnn/run.py \
         --seed 111 \
         --pdb_path "inputs/1BC8.pdb" \
@@ -57,13 +62,10 @@ python ligandmpnn/run.py \
 ```
 
 ### Dependencies
-To run the model you will need to have Python>=3.0, PyTorch, Numpy installed, and to read/write PDB files you will need [Prody](https://pypi.org/project/ProDy/).
+To run the model you will need to have Python=3.11, PyTorch=2.2.1, and NumPy=1.X installed.
 
-For example to make a new conda environment for LigandMPNN run:
-```
-conda create -n ligandmpnn_env python=3.11
-pip3 install -r requirements.txt
-```
+You will also need [Prody](https://pypi.org/project/ProDy/), which has been known to cause issues during build when installing via pip, depending on your system architecture. See the ProDy documentation for help with installation.
+
 
 ### Main differences compared with [ProteinMPNN](https://github.com/dauparas/ProteinMPNN) code
 - Input PDBs are parsed using [Prody](https://pypi.org/project/ProDy/) preserving protein residue indices, chain letters, and insertion codes. If there are missing residues in the input structure the output fasta file won't have added `X` to fill the gaps. The script outputs .fasta and .pdb files. It's recommended to use .pdb files since they will hold information about chain letters and residue indices.
@@ -71,7 +73,8 @@ pip3 install -r requirements.txt
 - Model writes to fasta files: `overall_confidence`, `ligand_confidence` which reflect the average confidence/probability (with T=1.0) over the redesigned residues  `overall_confidence=exp[-mean_over_residues(log_probs)]`. Higher numbers mean the model is more confident about that sequence. min_value=0.0; max_value=1.0. Sequence recovery with respect to the input sequence is calculated only over the redesigned residues.
 
 ### Model parameters
-To download model parameters run:
+Model parameters are included by default in the PyPi pip installation 
+To manually download model parameters run:
 ```
 bash scripts/get_model_params.sh "liganmpnn/data/model_params"
 ```
