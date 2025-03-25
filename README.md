@@ -4,6 +4,43 @@ This package provides inference code for [LigandMPNN](https://www.biorxiv.org/co
 
 Third party code: side chain packing uses helper functions from [Openfold](https://github.com/aqlaboratory/openfold).
 
+### Installation with pip (PyPi distribution, pretrained models included)
+```
+# set up your conda environment
+conda create -n ligandmpnn_env python=3.11
+conda activate ligandmpnn_env
+pip install ligandmpnn
+```
+```
+# example usage
+ligandmpnn --seed 111 --pdb_path inputs/1BC8.pdb --out_folder outputs/default
+```
+
+### Installation with pip (building from GitHub source)
+```
+# set up your conda environment
+conda create -n ligandmpnn_env python=3.11
+conda activate ligandmpnn_env
+```
+```
+# download source code
+git clone https://github.com/dauparas/LigandMPNN
+cd LigandMPNN
+```
+```
+# local install from source directory
+pip install .
+```
+```
+# run examples from the scripts directory
+# information for each example is provided in the documentation below
+cd scripts
+bash run_examples.sh
+bash sc_examples.sh
+```
+
+
+
 ### Running the code from source
 ```
 git clone https://github.com/dauparas/LigandMPNN.git
@@ -45,40 +82,40 @@ To run the model of your choice specify `--model_type` and optionally the model 
 - ProteinMPNN
 ```
 --model_type "protein_mpnn"
---checkpoint_protein_mpnn "ligandmpnn/data/model_params/proteinmpnn_v_48_002.pt" #noised with 0.02A Gaussian noise
---checkpoint_protein_mpnn "ligandmpnn/data/model_params/proteinmpnn_v_48_010.pt" #noised with 0.10A Gaussian noise
---checkpoint_protein_mpnn "ligandmpnn/data/model_params/proteinmpnn_v_48_020.pt" #noised with 0.20A Gaussian noise
---checkpoint_protein_mpnn "ligandmpnn/data/model_params/proteinmpnn_v_48_030.pt" #noised with 0.30A Gaussian noise
+--checkpoint_protein_mpnn "proteinmpnn_v_48_002.pt" #noised with 0.02A Gaussian noise
+--checkpoint_protein_mpnn "proteinmpnn_v_48_010.pt" #noised with 0.10A Gaussian noise
+--checkpoint_protein_mpnn "proteinmpnn_v_48_020.pt" #noised with 0.20A Gaussian noise
+--checkpoint_protein_mpnn "proteinmpnn_v_48_030.pt" #noised with 0.30A Gaussian noise
 ```
 - LigandMPNN
 ```
 --model_type "ligand_mpnn"
---checkpoint_ligand_mpnn "ligandmpnn/data/model_params/ligandmpnn_v_32_005_25.pt" #noised with 0.05A Gaussian noise
---checkpoint_ligand_mpnn "ligandmpnn/data/model_params/ligandmpnn_v_32_010_25.pt" #noised with 0.10A Gaussian noise
---checkpoint_ligand_mpnn "ligandmpnn/data/model_params/ligandmpnn_v_32_020_25.pt" #noised with 0.20A Gaussian noise
---checkpoint_ligand_mpnn "ligandmpnn/data/model_params/ligandmpnn_v_32_030_25.pt" #noised with 0.30A Gaussian noise
+--checkpoint_ligand_mpnn "ligandmpnn_v_32_005_25.pt" #noised with 0.05A Gaussian noise
+--checkpoint_ligand_mpnn "ligandmpnn_v_32_010_25.pt" #noised with 0.10A Gaussian noise
+--checkpoint_ligand_mpnn "ligandmpnn_v_32_020_25.pt" #noised with 0.20A Gaussian noise
+--checkpoint_ligand_mpnn "ligandmpnn_v_32_030_25.pt" #noised with 0.30A Gaussian noise
 ```
 - SolubleMPNN
 ```
 --model_type "soluble_mpnn"
---checkpoint_soluble_mpnn "ligandmpnn/data/model_params/solublempnn_v_48_002.pt" #noised with 0.02A Gaussian noise
---checkpoint_soluble_mpnn "ligandmpnn/data/model_params/solublempnn_v_48_010.pt" #noised with 0.10A Gaussian noise
---checkpoint_soluble_mpnn "ligandmpnn/data/model_params/solublempnn_v_48_020.pt" #noised with 0.20A Gaussian noise
---checkpoint_soluble_mpnn "ligandmpnn/data/model_params/solublempnn_v_48_030.pt" #noised with 0.30A Gaussian noise
+--checkpoint_soluble_mpnn "solublempnn_v_48_002.pt" #noised with 0.02A Gaussian noise
+--checkpoint_soluble_mpnn "solublempnn_v_48_010.pt" #noised with 0.10A Gaussian noise
+--checkpoint_soluble_mpnn "solublempnn_v_48_020.pt" #noised with 0.20A Gaussian noise
+--checkpoint_soluble_mpnn "solublempnn_v_48_030.pt" #noised with 0.30A Gaussian noise
 ```
 - ProteinMPNN with global membrane label
 ```
 --model_type "global_label_membrane_mpnn"
---checkpoint_global_label_membrane_mpnn "ligandmpnn/data/model_params/global_label_membrane_mpnn_v_48_020.pt" #noised with 0.20A Gaussian noise
+--checkpoint_global_label_membrane_mpnn "global_label_membrane_mpnn_v_48_020.pt" #noised with 0.20A Gaussian noise
 ```
 - ProteinMPNN with per residue membrane label
 ```
 --model_type "per_residue_label_membrane_mpnn"
---checkpoint_per_residue_label_membrane_mpnn "ligandmpnn/data/model_params/per_residue_label_membrane_mpnn_v_48_020.pt" #noised with 0.20A Gaussian noise
+--checkpoint_per_residue_label_membrane_mpnn "per_residue_label_membrane_mpnn_v_48_020.pt" #noised with 0.20A Gaussian noise
 ```
 - Side chain packing model
 ```
---checkpoint_path_sc "ligandmpnn/data/model_params/ligandmpnn_sc_v_32_002_16.pt"
+--checkpoint_path_sc "ligandmpnn_sc_v_32_002_16.pt"
 ```
 ## Design examples
 ### 1 default
