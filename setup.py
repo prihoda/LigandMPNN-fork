@@ -28,7 +28,7 @@ setup(
                       "MarkupSafe==2.1.5", 
                       "mpmath==1.3.0", 
                       "networkx==3.2.1", 
-                      "numpy==1.23.5", 
+                      "numpy>=1.23.5,<=1.26.4", 
                       "ProDy==2.4.1", 
                       "pyparsing==3.1.1", 
                       "scipy==1.12.0", 
