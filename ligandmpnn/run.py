@@ -1,7 +1,7 @@
 import argparse
 import copy
 import json
-import os.path
+import os, os.path
 import random
 import sys
 from importlib.resources import files
