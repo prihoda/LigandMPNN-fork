@@ -4,7 +4,7 @@ import json
 import os.path
 import random
 import sys
-import pkg_resources
+from importlib.resources import files
 import numpy as np
 import torch
 from prody import writePDB
@@ -380,20 +380,19 @@ def main() -> None:
         if not os.path.exists(base_folder + "stats"):
             os.makedirs(base_folder + "stats", exist_ok=True)
 
-    # use pkg_resources to load models
+    # use importlib.resources.files to load models
     if args.model_type == "protein_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_protein_mpnn))
+        checkpoint_path = os.fspath(files(__name__) / "data" / "model_params" / args.checkpoint_protein_mpnn)
     elif args.model_type == "ligand_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_ligand_mpnn))
+        checkpoint_path = os.fspath(files(__name__) / "data" / "model_params" / args.checkpoint_ligand_mpnn)
     elif args.model_type == "per_residue_label_membrane_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_per_residue_label_membrane_mpnn))
+        checkpoint_path = os.fspath(files(__name__) / "data" / "model_params" / args.checkpoint_per_residue_label_membrane_mpnn)
     elif args.model_type == "global_label_membrane_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_global_label_membrane_mpnn))
+        checkpoint_path = os.fspath(files(__name__) / "data" / "model_params" / args.checkpoint_global_label_membrane_mpnn)
     elif args.model_type == "soluble_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_soluble_mpnn))
+        checkpoint_path = os.fspath(files(__name__) / "data" / "model_params" / args.checkpoint_soluble_mpnn)
     else:
-        print("Choose one of the available models")
-        sys.exit()
+        print("Choose one of the available models"); sys.exit(1)
     checkpoint = torch.load(checkpoint_path, map_location=device)
 
     if args.model_type == "ligand_mpnn":
@@ -442,7 +441,7 @@ def main() -> None:
             device=device,
             num_mix=3,
         )
-        checkpoint_path_sc = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_path_sc))
+        checkpoint_path_sc = os.fspath(files(__name__) / "data" / "model_params" / args.checkpoint_path_sc)
         checkpoint_sc = torch.load(checkpoint_path_sc, map_location=device)
         model_sc.load_state_dict(checkpoint_sc["model_state_dict"])
         model_sc.to(device)
