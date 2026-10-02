@@ -4,7 +4,6 @@ import json
 import os.path
 import random
 import sys
-import pkg_resources
 import numpy as np
 import torch
 from prody import writePDB
@@ -43,31 +42,31 @@ def get_args():
     argparser.add_argument(
         "--checkpoint_protein_mpnn",
         type=str,
-        default="proteinmpnn_v_48_020.pt",
+        default="model_params/proteinmpnn_v_48_020.pt",
         help="Path to model weights.",
     )
     argparser.add_argument(
         "--checkpoint_ligand_mpnn",
         type=str,
-        default="ligandmpnn_v_32_010_25.pt",
+        default="model_params/ligandmpnn_v_32_010_25.pt",
         help="Path to model weights.",
     )
     argparser.add_argument(
         "--checkpoint_per_residue_label_membrane_mpnn",
         type=str,
-        default="per_residue_label_membrane_mpnn_v_48_020.pt",
+        default="model_params/per_residue_label_membrane_mpnn_v_48_020.pt",
         help="Path to model weights.",
     )
     argparser.add_argument(
         "--checkpoint_global_label_membrane_mpnn",
         type=str,
-        default="global_label_membrane_mpnn_v_48_020.pt",
+        default="model_params/global_label_membrane_mpnn_v_48_020.pt",
         help="Path to model weights.",
     )
     argparser.add_argument(
         "--checkpoint_soluble_mpnn",
         type=str,
-        default="solublempnn_v_48_020.pt",
+        default="model_params/solublempnn_v_48_020.pt",
         help="Path to model weights.",
     )
 
@@ -340,6 +339,14 @@ def get_args():
     
     return args
 
+def resolve_data_path(*parts: str) -> str:
+    """Use the path as given, or fall back to the data bundled with the package."""
+    path = os.path.join(*parts)
+    if os.path.exists(path):
+        return path
+    else:
+        return os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", path)
+
 def main() -> None:
     """
     Parse args
@@ -380,17 +387,17 @@ def main() -> None:
         if not os.path.exists(base_folder + "stats"):
             os.makedirs(base_folder + "stats", exist_ok=True)
 
-    # use pkg_resources to load models
+    # load the models bundled with the package
     if args.model_type == "protein_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_protein_mpnn))
+        checkpoint_path = resolve_data_path(args.checkpoint_protein_mpnn)
     elif args.model_type == "ligand_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_ligand_mpnn))
+        checkpoint_path = resolve_data_path(args.checkpoint_ligand_mpnn)
     elif args.model_type == "per_residue_label_membrane_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_per_residue_label_membrane_mpnn))
+        checkpoint_path = resolve_data_path(args.checkpoint_per_residue_label_membrane_mpnn)
     elif args.model_type == "global_label_membrane_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_global_label_membrane_mpnn))
+        checkpoint_path = resolve_data_path(args.checkpoint_global_label_membrane_mpnn)
     elif args.model_type == "soluble_mpnn":
-        checkpoint_path = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_soluble_mpnn))
+        checkpoint_path = resolve_data_path(args.checkpoint_soluble_mpnn)
     else:
         print("Choose one of the available models")
         sys.exit()
@@ -442,7 +449,7 @@ def main() -> None:
             device=device,
             num_mix=3,
         )
-        checkpoint_path_sc = pkg_resources.resource_filename(__name__, os.path.join("data", "model_params", args.checkpoint_path_sc))
+        checkpoint_path_sc = resolve_data_path("model_params", args.checkpoint_path_sc)
         checkpoint_sc = torch.load(checkpoint_path_sc, map_location=device)
         model_sc.load_state_dict(checkpoint_sc["model_state_dict"])
         model_sc.to(device)

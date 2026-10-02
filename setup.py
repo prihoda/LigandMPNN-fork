@@ -35,8 +35,7 @@ setup(
                       "sympy==1.12", 
                       "typing_extensions==4.10.0", 
                       "ml-collections==0.1.1", 
-                      "dm-tree==0.1.8", 
-                      "setuptools"],
+                      "dm-tree==0.1.8"],
     extras_require={
         "dev": ["pytest>=7.0", "twine>=4.0.2", "pytest-cov>=4.0", "wheel"],
     },
