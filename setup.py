@@ -31,7 +31,7 @@ setup(
                       "numpy>=1.23.5,<=1.26.4", 
                       "ProDy>=2.4.1,<=2.6.1",
                       "pyparsing==3.1.1", 
-                      "scipy==1.12.0", 
+                      "scipy>=1.12.0,<=1.13.0", 
                       "sympy==1.12", 
                       "typing_extensions>=4.10.0,<=4.12.2", 
                       "ml-collections==0.1.1", 
