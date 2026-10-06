@@ -33,7 +33,7 @@ setup(
                       "pyparsing==3.1.1", 
                       "scipy==1.12.0", 
                       "sympy==1.12", 
-                      "typing_extensions==4.10.0", 
+                      "typing_extensions>=4.10.0,<=4.12.2", 
                       "ml-collections==0.1.1", 
                       "dm-tree==0.1.8"],
     extras_require={
